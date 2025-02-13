@@ -1,0 +1,143 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Solicitud | Sindicato TS{% endblock %}
+
+{% block body %}
+<body class="form">
+    <div class="container mt-4 text-white fw-bold">
+        <div class="row py-3">
+            <div class="col-12 text-center">
+                <a href="{{ path('indexapp') }}">
+                    <img src="{{ asset('images/logo.png') }}" alt="Logo" class="img-fluid mb-3" style="max-width: 80px;">
+                </a>
+            </div>
+        </div>
+
+        <form method="POST" enctype="multipart/form-data" data-turbo="false">
+            {{ form_start(form) }}
+            {{ form_row(form._token) }}
+
+            <div class="row gx-5">
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">NOMBRE (S)</div>
+                    {{ form_widget(form.name, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.name) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">APELLIDO PATERNO</div>
+                    {{ form_widget(form.paternalName, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.paternalName) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">APELLIDO MATERNO</div>
+                    {{ form_widget(form.maternalName, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.maternalName) }}
+                </div>
+            </div>
+
+            <div class="row gx-5">
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">CALLE</div>
+                    {{ form_widget(form.street, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.street) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">ESTADO</div>
+                    {{ form_widget(form.state, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.state) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">MUNICIPIO</div>
+                    {{ form_widget(form.municipality, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.municipality) }}
+                </div>
+            </div>
+
+            <div class="row gx-5">
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">CÓDIGO POSTAL</div>
+                    {{ form_widget(form.postalCode, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.postalCode) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">CELULAR</div>
+                    {{ form_widget(form.phone, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.phone) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">RFC</div>
+                    {{ form_widget(form.rfc, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.rfc) }}
+                </div>
+            </div>
+
+            <img src="{{ asset('images/line.png') }}" alt="Line" class="img-fluid w-100">
+
+            <div class="row gx-5">
+                <div class="col-md-6 col-12 mb-3">
+                    <div class="p-3">EMPRESA</div>
+                    {{ form_widget(form.companyName, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.companyName) }}
+                </div>
+                <div class="col-md-6 col-12 mb-3">
+                    <div class="p-3">NÚMERO DE NÓMINA</div>
+                    {{ form_widget(form.companyNumber, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.companyNumber) }}
+                </div>
+            </div>
+            *Archivos (.PDF.PNJ.JPG)
+            <div class="row gx-5">
+			
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">INE </div>
+                    {{ form_widget(form.imagesINE, {'attr': {'class': 'forms', 'accept': 'application/pdf', 'image/png', 'image/jpeg'}}) }}
+                    {{ form_errors(form.imagesINE) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">COMPROBANTE DE DOMICILIO </div>
+                    {{ form_widget(form.imagesStreet, {'attr': {'class': 'forms', 'accept': 'application/pdf', 'image/png', 'image/jpeg'}}) }}
+                    {{ form_errors(form.imagesStreet) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">RECIBO DE NÓMINA </div>
+                    {{ form_widget(form.imagesNomina, {'attr': {'class': 'forms', 'accept': 'application/pdf', 'image/png', 'image/jpeg'}}) }}
+                    {{ form_errors(form.imagesNomina) }}
+                </div>
+            </div>
+
+            <img src="{{ asset('images/line.png') }}" alt="Line" class="img-fluid w-100">
+
+            <div class="row gx-5">
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">CANTIDAD SOLICITADA</div>
+                    {{ form_widget(form.requestedAmount, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.requestedAmount) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">BANCO</div>
+                    {{ form_widget(form.bank, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.bank) }}
+                </div>
+                <div class="col-md-4 col-12 mb-3">
+                    <div class="p-3">CLAVE INTERBANCARIA</div>
+                    {{ form_widget(form.interbank, {'attr': {'class': 'forms'}}) }}
+                    {{ form_errors(form.interbank) }}
+                </div>
+            </div>
+
+            <div class="row py-3">
+                <div class="col-6 text-start">
+                    <a href="{{ path('indexapp') }}" class="btn text-white fw-bold">
+                        <img src="{{ asset('images/iconow.png') }}" alt="Logo" class="img-fluid" style="max-width: 80px;">
+                    </a>
+                </div>
+                <div class="col-6 text-end">
+                    <button type="submit" class="btn btn-primary py-3">ENVIAR</button>
+                </div>
+            </div>
+
+            {{ form_end(form) }}
+        </form>
+    </div>
+</body>
+{% endblock %}

@@ -1,0 +1,58 @@
+
+services:
+  webappts:
+    build:
+      context: .
+      dockerfile: .docker/Dockerfile
+    ports:
+      - "8004:80"
+    networks:
+      database: {}
+    volumes:
+      #- ./public:/var/www/html/public
+      #- ./src:/var/www/html/src
+      #- ./templates:/var/www/html/templates
+      #- ./config:/var/www/html/config
+      #- ./assets:/var/www/html/assets
+      - .:/var/www/html
+
+    env_file: .docker/env/docker.env
+
+  mysql:
+    image: mysql:8.0.35
+    command: --default-authentication-plugin=mysql_native_password
+    ports:
+      - "33306:3306"
+    networks:
+      database: {}
+    environment:
+      MYSQL_DATABASE: webapptsindicato
+      MYSQL_ROOT_PASSWORD: root
+      MYSQL_USER: user
+      MYSQL_PASSWORD: root
+    volumes:
+      - mysql:/var/lib/mysql
+    #  - ./init-scripts:/docker-entrypoint-initdb.d  # Include custom initialization scripts
+    #restart: always
+
+  phpmyadmin:
+    image: phpmyadmin/phpmyadmin
+   # restart: always
+    ports:
+      - "8080:80"
+    networks:
+      database: {}
+    environment:
+      PMA_HOST: mysql
+      UPLOAD_LIMIT: 100M
+      PMA_ABSOLUTE_URI: ""
+    depends_on:
+      - mysql
+
+
+volumes:
+  mysql:
+    driver: "local"
+networks:
+  database:
+    external: true

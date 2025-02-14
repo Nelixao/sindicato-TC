@@ -184,8 +184,31 @@ final class WebAppLoanController extends AbstractController
             
          'form' => $form->createView(),
       ]);
+
+   }
+  
+  
+  #[Route('/customer', name: 'Custome')]
+  public function Customer(): Response
+  {
+      return $this->render('web_app_loan/customer.html.twig', [
+          'controller_name' => 'WebAppLoanController',
+      ]);
   }
 
+  #[Route('/Admin', name: 'Admin')]
+  public function Admin(): Response
+  {
+      return $this->render('web_app_loan/admin.html.twig', [
+          'controller_name' => 'WebAppLoanController',
+      ]);
+  }
 
-   
+  #[Route('/solicitudes', name: 'solicitudes')]
+  public function solicitudes(): Response
+  {
+      return $this->render('web_app_loan/solicitudes.html.twig', [
+          'controller_name' => 'WebAppLoanController',
+      ]);
+  }
 }

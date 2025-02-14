@@ -90,17 +90,17 @@
 			
                 <div class="col-md-4 col-12 mb-3">
                     <div class="p-3">INE </div>
-                    {{ form_widget(form.imagesINE, {'attr': {'class': 'forms', 'accept': 'application/pdf', 'image/png', 'image/jpeg'}}) }}
+                    {{ form_widget(form.imagesINE, {'attr': {'class': 'forms', 'accept': 'application/pdf'}}) }}
                     {{ form_errors(form.imagesINE) }}
                 </div>
                 <div class="col-md-4 col-12 mb-3">
                     <div class="p-3">COMPROBANTE DE DOMICILIO </div>
-                    {{ form_widget(form.imagesStreet, {'attr': {'class': 'forms', 'accept': 'application/pdf', 'image/png', 'image/jpeg'}}) }}
+                    {{ form_widget(form.imagesStreet, {'attr': {'class': 'forms', 'accept': 'application/pdf'}}) }}
                     {{ form_errors(form.imagesStreet) }}
                 </div>
                 <div class="col-md-4 col-12 mb-3">
                     <div class="p-3">RECIBO DE NÓMINA </div>
-                    {{ form_widget(form.imagesNomina, {'attr': {'class': 'forms', 'accept': 'application/pdf', 'image/png', 'image/jpeg'}}) }}
+                    {{ form_widget(form.imagesNomina, {'attr': {'class': 'forms', 'accept': 'application/pdf'}}) }}
                     {{ form_errors(form.imagesNomina) }}
                 </div>
             </div>
@@ -132,12 +132,98 @@
                     </a>
                 </div>
                 <div class="col-6 text-end">
-                    <button type="submit" class="btn btn-primary py-3">ENVIAR</button>
+                  <button type="button" class="btn btn-primary py-3" data-bs-toggle="modal" data-bs-target="avisoModalToggle">
+    ACEPTAR
+</button>
+
                 </div>
+				 
+            </div>
+				
+
+
+	<div class="modal-fade" id="avisoModalToggle" tabindex="-1" aria-labelledby="modalTitle" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title fs-5" id="modalTitle">AVISO DE PRIVACIDAD</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Cerrar" id="closeButton" ></button>
             </div>
 
-            {{ form_end(form) }}
-        </form>
+            <div class="modal-body">
+			<div class="contenido text-dark">
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+                <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+				<p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+			    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit.</p>
+            </div>
+				</div>
+            <div class="modal-footer">
+                <label>
+                    <input type="checkbox" id="privacyAgreement" name="privacy_agreement">
+                    Estoy de acuerdo
+                </label>
+                <button class="btn text-dark" data-bs-dismiss="modal"  >ENVIAR</button>
+            </div>
+        </div>
     </div>
-</body>
+</div>
+
+			<div class="modal fade" id="confirmacionModal" tabindex="-1" aria-labelledby="modalTitle2" aria-hidden="true" data-bs-backdrop="static" data-bs-keyboard="false">
+    <div class="modal-dialog modal-dialog-centered">
+        <div class="modal-content text-center">
+            <div class="modal-body">
+                <img src="{{ asset('images/letras.png') }}" class="img-fluid mb-3" style="max-width: 800px;">
+                <img src="{{ asset('images/listo.png') }}" class="img-fluid mb-3" style="max-width: 800px;">
+                
+                <div class="text-white mt-5 fw-bold">
+                    <p>**En breve nos comunicaremos contigo**</p>
+                    {{ form_widget(form.submit, {'attr': {'class': 'btn text-dark', 'id': 'closeModalButton'}}) }}
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+		</div>
+		{{ form_end(form) }}
+			</form>
+
+	</body>
+	
+	<script>
+
+
+function toggleSubmitButton() {
+document.getElementById('submitButton').disabled = !document.getElementById('privacyAgreement').checked;
+}
+
+async function saveLoan(form) {
+
+
+let data = new FormData(form)
+let url = document.getElementById("url-webapploan-save-application").value;
+
+
+const response = await fetch(url, {
+method: "POST",
+body: JSON.stringify(serialize(data))
+});
+
+console.log(response);
+}
+
+   
+	document.getElementById('closeModalButton').addEventListener('click', function () {
+        let modal = new bootstrap.Modal(document.getElementById('confirmacionModal'));
+        modal.hide(); // Cierra el modal solo cuando se presiona el botón de submit
+    });
+
+	</script>
+
 {% endblock %}
